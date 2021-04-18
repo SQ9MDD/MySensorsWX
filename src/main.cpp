@@ -31,8 +31,11 @@ MyMessage msgBaro(CHILD_ID_BARO, V_PRESSURE);                                   
 MyMessage msgAI1(CHILD_ID_AI1, V_VOLTAGE);                                              //
 
 void send_temp(){                                                                       //
-  float temperature = 0;                                                                //
-  temperature = bme.readTemperature();                                                  //
+  float temperature = 0.0;                                                              //
+  temperature = bme.readTemperature(); 
+  if(temperature <= -44.1){
+    asm volatile ("  jmp 0");                                                           // if bme readings falls reset device
+  }                                                                                     //
   send(msgTemp.set((float)temperature, 1));                                             //
 }
 
