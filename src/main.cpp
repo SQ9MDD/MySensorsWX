@@ -95,18 +95,18 @@ void loop(){                                                                    
     // smoothing readings 
     avg_mesure = (avg_mesure*(weight-1) + sensorValue) / weight;
     
-    float bat_low = 3.4;                                                        // minimum effective voltage for 18650 cell
-    float bat_max = 4.2;                                                        // maximum effective voltage for 18650 cell
+    float bat_low = 3.4;                                                                // minimum effective voltage for 18650 cell
+    float bat_max = 4.2;                                                                // maximum effective voltage for 18650 cell
     // calculate battery percent within range
     // 3,4V - 0%
     // 4,2V - 100%
     float batteryPcnt = 100.0/(bat_max-bat_low) * float(avg_mesure-bat_low);
     batteryPcnt = constrain(batteryPcnt,0,100);
 
-    sendBatteryLevel(batteryPcnt);                                                        //
+    sendBatteryLevel(batteryPcnt);                                                      //
     send(msgAI1.set(avg_mesure, 2)); 
-    send_temp();                                                                          //
-    send_hum();                                                                           //
-    send_baro();                                                                          //
-    sleep(SLEEP_TIME);                                                                    // go to sleep
+    send_temp();                                                                        //
+    send_hum();                                                                         //
+    send_baro();                                                                        //
+    sleep(SLEEP_TIME);                                                                  // go to sleep
 }
